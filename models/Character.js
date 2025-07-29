@@ -1,34 +1,30 @@
 class Character {
-	// constructor used when called new Character
-	constructor(name, health, attack, defense) {
+	constructor(name, health, attack, defense, classType = "Adventurer") {
 		this.name = name;
-		this.health = health;
+		this.classType = classType;
+
+		// Health clamp
+		this.health = health > 0 ? health : 1;
 		this.attack = attack;
 		this.defense = defense;
 	}
 
-	// positive effects will be positive number, negative effect negative number
-	getTotalDefense(effect = 0) {
-		const totalDefense = this.defense + effect;
-		return totalDefense > 0 ? totalDefense : 0;
+	setHealth(newHealth) {
+		this.health = newHealth > 0 ? newHealth : 0;
+		return this.health;
 	}
 
-	getTotalAttack(effect = 0) {
-		const totalAttack = this.attack + effect;
-		return totalAttack > 0 ? totalAttack : 0;
+	get isAlive() {
+		return this.health > 0;
 	}
 
-	attackTarget(target) {
-		const damage = this.attack - target.defense;
-		// make sure damage can't be less then zero
-		const actualDamage = damage > 0 ? damage : 0;
-		// make sure target health can't be less then zero
-		target.health = Math.max(0, target.health - actualDamage);
+	getStats() {
 		return {
-			attacker: this.name,
-			target: target.name,
-			damage: actualDamage,
-			targetHealth: target.health,
+			name: this.name,
+			classType: this.classType,
+			health: this.health,
+			attack: this.attack,
+			defense: this.defense,
 		};
 	}
 }
