@@ -1,6 +1,8 @@
 // computing damage, returns number
 function computePlannedDamage(attacker, defender) {
+	console.log(attacker, defender);
 	const damage = Math.max(0, attacker.attack - defender.defense);
+	console.log("damage", damage);
 	return damage;
 }
 
@@ -20,10 +22,11 @@ function resolveAttack(attacker, defender) {
 
 	return {
 		attacker: attacker.name,
-		target: defender,
+		target: defender.name,
 		planned: plannedDamage,
 		dealt: actualDamage.dealt,
 		targetHealth: actualDamage.newHealth,
-		isTargetAlive: newHealth > 0,
+		isTargetAlive: actualDamage.newHealth > 0,
 	};
 }
+export default resolveAttack;

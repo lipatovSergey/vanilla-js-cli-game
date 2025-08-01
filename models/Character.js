@@ -1,4 +1,4 @@
-class Character {
+export class Character {
 	constructor(name, health, attack, defense, classType = "Adventurer") {
 		this.name = name;
 		this.classType = classType;
@@ -26,5 +26,23 @@ class Character {
 			attack: this.attack,
 			defense: this.defense,
 		};
+	}
+}
+
+export class Warrior extends Character {
+	constructor(name) {
+		super(name, 120, 6, 4, "Warrior");
+	}
+}
+
+export class Mage extends Character {
+	constructor(name) {
+		super(name, 80, 12, 0, "Mage");
+	}
+}
+
+export class Rogue extends Character {
+	constructor(name) {
+		super(name, 100, 8, 2, "Rogue");
 	}
 }
