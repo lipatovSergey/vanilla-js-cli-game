@@ -14,17 +14,16 @@ function applyDamage(defender, damage) {
 	return { dealt, newHealth };
 }
 
-/*
-Теперь можно написать resolveAttack, который будет использовать обе функции:
-Посчитать planned = computePlannedDamage(attacker, defender).
-Применить урон через applyDamage, получить { dealt, newHealth }.
-Вернуть объект:
-{
-  attacker: attacker.name,
-  target: defender.name,
-  planned,
-  dealt,
-  targetHealth: newHealth,
-  isTargetAlive: newHealth > 0
+function resolveAttack(attacker, defender) {
+	const plannedDamage = computePlannedDamage(attacker, defender);
+	const actualDamage = applyDamage(defender, plannedDamage);
+
+	return {
+		attacker: attacker.name,
+		target: defender,
+		planned: plannedDamage,
+		dealt: actualDamage.dealt,
+		targetHealth: actualDamage.newHealth,
+		isTargetAlive: newHealth > 0,
+	};
 }
-*/
