@@ -13,6 +13,9 @@ const classMap = {
 	Rogue,
 };
 
+classMap.map((cls, index) => {
+	console.log(cls);
+});
 const classes = ["Warrior", "Mage", "Rogue"];
 console.log("Choose your class:");
 classes.forEach((cls, index) => {
