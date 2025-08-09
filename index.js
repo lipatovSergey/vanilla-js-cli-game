@@ -14,10 +14,15 @@ const classMap = {
 };
 
 const classes = ["Warrior", "Mage", "Rogue"];
+let player;
 function askForClass() {
   console.log("Choose your class:");
-  classes.forEach((cls, index) => {
-    console.log(`${index + 1}. ${cls}`);
+  Object.entries(classMap).forEach(([key, cls], index) => {
+    const tempChar = new cls("temp");
+    const { health, attack, defense } = tempChar.getStats();
+    console.log(
+      `${index + 1}. ${key} - HP: ${health}, ATK: ${attack}, DEF: ${defense}`,
+    );
   });
 
   rl.question("Enter the number of your class: ", (classChoice) => {
@@ -30,6 +35,8 @@ function askForClass() {
     const selectedClass = classes[choiceIndex];
     rl.question("Enter your character's name: ", (characterName) => {
       console.log(`You created a ${selectedClass} named ${characterName}`);
+      player = new classMap[selectedClass](characterName);
+      console.log(player);
       rl.close();
     });
   });
