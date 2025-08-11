@@ -1,3 +1,4 @@
+import { resolve } from "dns";
 import resolveAttack from "./combat/engine.js";
 import { Warrior, Mage, Rogue } from "./models/Character.js";
 import readline from "readline";
@@ -13,9 +14,14 @@ const classMap = {
   Rogue,
 };
 
-const classes = ["Warrior", "Mage", "Rogue"];
-let player;
-function askForClass() {
+let player1;
+let player2;
+function ask(question) {
+  return new Promise((resolve) => {
+    rl.question(question, (answer) => resolve(answer));
+  });
+}
+async function askForClass(player) {
   console.log("Choose your class:");
   Object.entries(classMap).forEach(([key, cls], index) => {
     const tempChar = new cls("temp");
@@ -25,6 +31,11 @@ function askForClass() {
     );
   });
 
+  let selectedClass;
+  while (!selectedClass) {
+    const classChoice = await ask("Enter the number of your class");
+    const i = Number(classChoice) - 1;
+  }
   rl.question("Enter the number of your class: ", (classChoice) => {
     const choiceIndex = parseInt(classChoice) - 1;
     if (choiceIndex < 0 || choiceIndex > classes.length - 1) {
@@ -42,4 +53,5 @@ function askForClass() {
   });
 }
 
-askForClass();
+askForClass(player1);
+askForClass(player2);
