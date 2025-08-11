@@ -35,6 +35,7 @@ async function askForClass(player) {
   while (!selectedClass) {
     const classChoice = await ask("Enter the number of your class");
     const i = Number(classChoice) - 1;
+    if(Number.isInteger(i) && i >= 0 && i < classMap.length)
   }
   rl.question("Enter the number of your class: ", (classChoice) => {
     const choiceIndex = parseInt(classChoice) - 1;
